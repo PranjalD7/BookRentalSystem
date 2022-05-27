@@ -26,14 +26,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
         return authProvider;
     }
-    protected void configure(HttpSecurity http) throws Exception {
+/*    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home","/user").access("hasRole('USER')")
+
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/", "/home","/user/**").hasRole("USER")
                 .and()
                 // some more method calls
-                .formLogin();
-    }
+                .formLogin().loginPage("/login").permitAll()
+                .defaultSuccessUrl("/admin/viewBooks", true);
+
+    }0 */
+protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+            .antMatchers("/", "/home").access("hasRole('USER')")
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            .and()
+            // some more method calls
+            .formLogin();
+}
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());

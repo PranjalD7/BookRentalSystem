@@ -20,6 +20,7 @@ public class adminController {
 
     @GetMapping(value = "/viewBooks")
     public List<Books> AllBooks() {
+
         return bs.findAll();
     }
 
