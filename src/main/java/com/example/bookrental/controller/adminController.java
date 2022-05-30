@@ -2,6 +2,7 @@ package com.example.bookrental.controller;
 import com.example.bookrental.Entities.Books;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.example.bookrental.service.BookService;
 
@@ -11,13 +12,19 @@ import java.util.List;
 import java.util.Optional;
 
 
-@RestController
+@Controller
 @RequestMapping(value="/admin")
 public class adminController {
 
     @Autowired
     private BookService bs;
 
+    @GetMapping
+    public String adminHome()
+    {
+        return "adminHome";
+    }
+    @ResponseBody
     @GetMapping(value = "/viewBooks")
     public List<Books> AllBooks() {
 
