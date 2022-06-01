@@ -30,16 +30,16 @@ public class adminController {
 
         return bs.findAll();
     }
-
+    @ResponseBody
     @PostMapping(value = "/addBooks")
     public Books addNewBook(@RequestParam("bookName") String bookName, @RequestParam("units") int units, @RequestParam("category") String category) {
         Books addNew = new Books(bookName, category, units);
         bs.save(addNew);
         return addNew;
     }
-
-    @PutMapping(value = "/editBooks/{id}")
-    public String editBook(@PathVariable long  id, @RequestParam("bookName") String bookName, @RequestParam("units") int units, @RequestParam("category") String category, @RequestParam("pickupDate") String pickupDate, @RequestParam("pickupDate") String returnDate) {
+    @ResponseBody
+    @RequestMapping(value = "/editBooks")
+    public String editBook(@RequestParam long  id, @RequestParam("bookName") String bookName, @RequestParam("units") int units, @RequestParam("category") String category, @RequestParam("pickupDate") String pickupDate, @RequestParam("returnDate") String returnDate) {
 
         Books bk = bs.findById(id).get();
         bk.setBookName(bookName);
@@ -51,8 +51,9 @@ public class adminController {
         return "book data updated";
     }
 
-    @DeleteMapping(value = "/deleteBook/{id}")
-    public String deleteBook(@PathVariable long  id)
+    @ResponseBody
+    @RequestMapping(value = "/deleteBook")
+    public String deleteBook(@RequestParam long  id)
     {
         bs.deleteBook(id);
         return "Book Deleted";

@@ -26,6 +26,29 @@ public class Books {
         this.category = category;
         this.units = units;
     }
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
+    private UserBook reservedByUser;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
+    private UserBook theUser;
+
+    public UserBook getReservedByUser() {
+        return reservedByUser;
+    }
+
+    public void setReservedByUser(UserBook reservedByUser) {
+        this.reservedByUser = reservedByUser;
+    }
+
+    public UserBook getTheUser() {
+        return theUser;
+    }
+
+    public void setTheUser(UserBook theUser) {
+        this.theUser = theUser;
+    }
 
     public Books()
     {

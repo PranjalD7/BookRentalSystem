@@ -3,6 +3,7 @@ package com.example.bookrental.Entities;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserBook {
@@ -28,9 +29,27 @@ public class UserBook {
     private String address;
     private String city;
     private String phoneNumber;
+    @OneToMany(mappedBy="reservedByUser")
+    private List<Books> reservedBooks;
 
+    @OneToMany(mappedBy="theUser")
+    private List<Books> books;
 
+    public List<Books> getReservedBooks() {
+        return reservedBooks;
+    }
 
+    public void setReservedBooks(List<Books> reservedBooks) {
+        this.reservedBooks = reservedBooks;
+    }
+
+    public List<Books> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Books> books) {
+        this.books = books;
+    }
 
     public int getUid() {
         return uid;
